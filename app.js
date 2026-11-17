@@ -82,32 +82,12 @@
     .setView(cfg.center || [52.52, 13.405], cfg.zoom || 12);
   L.control.zoom({ position: "bottomright" }).addTo(map);
 
-  const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  const OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-  let tiles = null;
-  let useFallback = false;
-  function setTiles() {
-    if (tiles) map.removeLayer(tiles);
-    if (useFallback) {
-      // CARTO erişilemezse standart OSM altlığı.
-      tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: OSM_ATTR, maxZoom: 19 }).addTo(map);
-      return;
-    }
-    const style = darkQuery.matches ? "dark_all" : "light_all";
-    tiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/" + style + "/{z}/{x}/{y}{r}.png", {
-      attribution: OSM_ATTR + ' &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: "abcd",
-      maxZoom: 20,
-    }).addTo(map);
-    let loaded = 0, failed = 0;
-    tiles.on("tileload", () => { loaded++; });
-    tiles.on("tileerror", () => {
-      failed++;
-      if (!useFallback && loaded === 0 && failed >= 4) { useFallback = true; setTiles(); }
-    });
-  }
-  setTiles();
-  if (darkQuery.addEventListener) darkQuery.addEventListener("change", setTiles);
+  // Altlık harita: API anahtarı gerektirmeyen OpenStreetMap karoları.
+  // Koyu tema, style.css'teki filtreyle elde ediliyor. config.js'te tileUrl ile değiştirilebilir.
+  L.tileLayer(cfg.tileUrl || "https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: cfg.tileAttribution || '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 19,
+  }).addTo(map);
 
   const bounds = cfg.bounds ? L.latLngBounds(cfg.bounds) : null;
   if (bounds) {

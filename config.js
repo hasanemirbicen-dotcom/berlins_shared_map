@@ -13,6 +13,10 @@ window.MAP_CONFIG = {
   title: null,
   subtitle: null,
 
+  // Altlık harita. null bırakırsan anahtarsız OpenStreetMap kullanılır.
+  tileUrl: null,
+  tileAttribution: null,
+
   center: [52.52, 13.405],
   zoom: 12,
 

@@ -9,7 +9,7 @@ Herkesin birlikte doldurduğu canlı bir harita. Linki açan kişi haritaya bir 
 
 - **Ön yüz:** düz HTML/CSS/JS ve [Leaflet](https://leafletjs.com). GitHub Pages'te ücretsiz yayınlanır.
 - **Veri:** [Supabase](https://supabase.com) (ücretsiz plan yeterli). Postgres tablosu ve canlı güncellemeler buradan geliyor.
-- **Altlık harita:** © OpenStreetMap katkıcıları, © CARTO
+- **Altlık harita:** © OpenStreetMap katkıcıları (API anahtarı gerektirmez)
 
 ## Dosyalar
 
