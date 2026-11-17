@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Berlin'in Ortak Haritası</title>
+  <meta name="description" content="#30DayMapChallenge Day 16 · Collaborative — a live map of Berlin that everyone fills in together. Türkçe · English · Deutsch">
+  <meta property="og:title" content="Berlin'in Ortak Haritası · Berlin's Shared Map · Berlins gemeinsame Karte">
+  <meta property="og:description" content="#30DayMapChallenge · Day 16 · Collaborative">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="map"></div>
+
+  <header class="panel" id="panel">
+    <div class="panel-top">
+      <p class="eyebrow" data-i18n="eyebrow"></p>
+      <div class="tools">
+        <div class="lang" id="lang" role="group" aria-label="Dil / Language / Sprache">
+          <button type="button" data-lang="tr" lang="tr">TR</button>
+          <button type="button" data-lang="en" lang="en">EN</button>
+          <button type="button" data-lang="de" lang="de">DE</button>
+        </div>
+        <button id="btn-collapse" class="collapse" type="button" data-i18n-aria="collapse">–</button>
+      </div>
+    </div>
+    <h1 id="title"></h1>
+    <p class="lede" id="subtitle"></p>
+    <div class="stats">
+      <span><b id="stat-pins">0</b> <span data-i18n="pins"></span></span>
+      <span><b id="stat-people">0</b> <span data-i18n="people"></span></span>
+    </div>
+    <ul class="legend" id="legend" data-i18n-aria="legendAria"></ul>
+    <div class="actions">
+      <button id="btn-add" class="primary" type="button" data-i18n="add"></button>
+      <button id="btn-share" type="button" data-i18n="share"></button>
+      <button id="btn-replay" class="secondary" type="button" data-i18n="replay"></button>
+      <button id="btn-export" class="secondary" type="button" data-i18n="export"></button>
+    </div>
+  </header>
+
+  <div id="banner" class="banner" hidden>
+    <b data-i18n="demoTitle"></b> <span data-i18n="demoText"></span>
+  </div>
+
+  <div id="hint" class="hint" hidden>
+    <span data-i18n="hint"></span>
+    <button id="btn-cancel-pick" type="button" data-i18n="cancel"></button>
+  </div>
+
+  <div id="replay-label" class="replay-label" hidden></div>
+
+  <form id="sheet" class="sheet" hidden autocomplete="off">
+    <h2 data-i18n="sheetTitle"></h2>
+    <fieldset class="chips" id="chips">
+      <legend data-i18n="category"></legend>
+    </fieldset>
+    <label class="field">
+      <span data-i18n="message"></span>
+      <textarea id="f-message" maxlength="280" rows="3" required data-i18n-ph="messagePh"></textarea>
+      <span class="count" id="f-count">0/280</span>
+    </label>
+    <label class="field">
+      <span><span data-i18n="nick"></span> <span class="opt" data-i18n="optional"></span></span>
+      <input id="f-nick" maxlength="40" data-i18n-ph="nickPh">
+    </label>
+    <p class="small" data-i18n="sheetNote"></p>
+    <div class="sheet-actions">
+      <button type="button" id="f-cancel" data-i18n="cancel"></button>
+      <button type="submit" class="primary" id="f-submit" data-i18n="submit"></button>
+    </div>
+  </form>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
